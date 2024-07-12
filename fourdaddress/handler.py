@@ -4,6 +4,7 @@ import logging
 import ipaddress
 
 from vdom_api import (ApiEndpoint,
+        ApiError,
         fw_addr_body,
         fw_grp_body,
         app_grp_body)
@@ -47,7 +48,13 @@ def update_vdom_api(options, entries, verbose=False):
 
     for vdom in vdoms:
         api = ApiEndpoint(host=host, vdom=vdom, token=token, verify=verify)
-        existing_results = api.read(endpoint=endpoint)
+        try:
+            existing_results = api.read(endpoint=endpoint)
+        except ApiError as e:
+            logger.error(str(e))
+            logger.warning(f'{vdom}: list existing addresses failed')
+            #skip to next vdom in the list
+            continue
 
         for entry in entries:
             name = entry.hostname
@@ -58,9 +65,23 @@ def update_vdom_api(options, entries, verbose=False):
             match = [r for r in existing_results if r['name'] == name]
             if match and match[0]['subnet'] == subnet:
                 continue
+
             elif match:
-                logger.info(f'{name}: update subnet to {subnet}')
-                api.update(name=name, endpoint=endpoint, body=body)
+                if verbose:
+                    logger.info(f'{name}: updating subnet to {subnet}')
+
+                try:
+                    api.update(name=name, endpoint=endpoint, body=body)
+                except ApiError as e:
+                    logger.error(str(e))
+                    logger.warning(f'{name}: update subnet failed')
+
             else:
-                logger.info(f'{name}: create')
-                api.create(name=name, endpoint=endpoint, body=body)
+                if verbose:
+                    logger.info(f'{name}: create')
+
+                try:
+                    api.create(name=name, endpoint=endpoint, body=body)
+                except ApiError as e:
+                    logger.error(str(e))
+                    logger.warning(f'{name}: create failed')

@@ -88,6 +88,8 @@ class ApiEndpoint():
     def _request(self, url, method='get', body={}):
         #strip off query string, which includes access_token for logging
         url_safe = url.split('?')[0]
+        results = []
+        status = None
 
         if method == 'get':
             request_f = requests.get
@@ -103,17 +105,31 @@ class ApiEndpoint():
             r = request_f(url, **request_kwargs)
             r.raise_for_status()
             resp = r.json()
-        
-        except requests.HTTPError:
-            raise ApiError(f'HTTPError for {url_safe}')
+            results.extend(resp.get('results', []))
+
+        except requests.HTTPError as e:
+            e_str = str(e)
+            if e_str.startswith('401'):
+                error = 'Unauthorized, check dest_token in config' 
+            elif e_str.startswith('404'):
+                error = 'Not Found'
+            elif e_str.startswith('424'):
+                error = 'Missing Dependency, check dest_vdoms in config'
+            elif e_str.startswith('429'):
+                error = 'Too Many Requests'
+            else:
+                error = e_str
+            raise ApiError(error)
 
         except json.decoder.JSONDecodeError:
-            raise ApiError(f'JSONDecodeError for {url_safe}')
+            error = f'JSONDecodeError for {url_safe}'
+            raise ApiError(error)
 
         except Exception as e:
-            raise ApiError(f'Fatal error for {url_safe}: {e}')
+            error = f'Fatal error for {url_safe}: {e}'
+            raise ApiError(error)
 
-        return resp.get('results', [])
+        return results
 
 
     def create(self, endpoint='', name='', body={}):
@@ -129,7 +145,6 @@ class ApiEndpoint():
         url = self._url(url_t, name)
         #create = POST request
         return self._request(url, method='post', body=body)
-
 
     def read(self, endpoint='', name=''):
         if endpoint == '/firewall/address' and name:
