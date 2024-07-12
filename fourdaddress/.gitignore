@@ -1,0 +1,5 @@
+config.ini
+pyvenv.cfg
+bin/
+include/
+lib/
