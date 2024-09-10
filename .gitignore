@@ -1,0 +1,12 @@
+#OS specific clutter
+.DS_Store
+#text editor clutter
+*.swp
+#ignore venv
+bin/
+include/
+lib/
+lib64
+__pycache__/
+pyvenv.cfg
+

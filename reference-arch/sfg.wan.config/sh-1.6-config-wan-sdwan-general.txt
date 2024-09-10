@@ -1,0 +1,77 @@
+config system sdwan
+config zone
+edit "local-shore"
+next
+edit "local-cell"
+next
+edit "local-vsata"
+next
+edit "local-vsatb"
+next
+edit "local-lband"
+next
+edit "local-stara"
+next
+edit "local-starb"
+next
+edit "hub-shore"
+next
+edit "hub-cell"
+next
+edit "hub-vsata"
+next
+edit "hub-vsatb"
+next
+edit "hub-lband"
+next
+edit "hub-stara"
+next
+edit "hub-starb"
+next
+end
+
+config health-check
+edit "arf74internet"
+set server "8.8.8.8"
+set interval 5000
+set probe-timeout 2500
+set recoverytime 2
+set probe-count 5
+set sla-fail-log-period 5
+set sla-pass-log-period 5
+set threshold-warning-packetloss 5
+set threshold-alert-packetloss 15
+set threshold-warning-latency 800
+set threshold-alert-latency 1000
+set members 0
+config sla
+edit 1
+set link-cost-factor packet-loss
+set packetloss-threshold 15
+next
+end
+next
+end
+
+config service
+delete "Default_DNS"
+delete "Default_Office_365"
+delete "Default_Gmail"
+delete "Default_Google Search"
+delete "Default_FortiGuard"
+edit 99
+set name "arf74internet"
+set mode sla
+set dst "all"
+set src "all"
+config sla
+edit "arf74internet"
+set id 1
+next
+end
+set priority-zone "hub-shore" "hub-cell" "hub-vsata" "hub-vsatb" "hub-lband" "hub-stara" "hub-starb" "local-shore" "local-cell" "local-vsata" "local-vsatb" "local-lband" "local-stara" "local-starb"
+next
+end
+end
+
+

@@ -1,0 +1,8 @@
+config firewall addrgrp
+edit "arf74-blocked-internet-devices"
+next
+edit "arf74-high-priority-devices"
+next
+edit "arf74-low-priority-devices"
+next
+end

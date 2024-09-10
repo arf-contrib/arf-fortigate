@@ -1,0 +1,12 @@
+config application group
+edit "arf74-high-priority-apps"
+set application 16195 16206
+next
+end
+
+config application group
+edit "arf74-low-priority-apps"
+set application 31077 33321 17396
+next
+end
+

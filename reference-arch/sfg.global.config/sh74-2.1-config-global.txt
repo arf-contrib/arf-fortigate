@@ -1,0 +1,13 @@
+set autolog-fsck-enable enable
+set timezone Etc/GMT
+set admintimeout 15
+set cli-audit-log enable
+set gui-app-detection-sdwan enable
+set gui-auto-upgrade-setup-warning disable
+set gui-date-format yyyy-MM-dd
+set gui-display-hostname enable
+set gui-firmware-upgrade-warning disable
+set gui-forticare-registration-setup-warning disable
+set gui-local-out enable
+set gui-replacement-message-groups enable
+set vdom-mode multi-vdom

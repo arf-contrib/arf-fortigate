@@ -1,0 +1,33 @@
+config system accprofile
+edit "object_admin"
+set fwgrp custom
+config fwgrp-permission
+set address read-write
+set service read-write
+end
+next
+edit "vdom_admin"
+set secfabgrp read-write
+set ftviewgrp read-write
+set authgrp read-write
+set sysgrp custom
+set netgrp read-write
+set loggrp read-write
+set fwgrp read-write
+set vpngrp read-write
+set utmgrp read-write
+set wanoptgrp read-write
+set wifi read-write
+set cli-diagnose enable
+set cli-get enable
+set cli-show enable
+set cli-exec enable
+set cli-config enable
+config sysgrp-permission
+set admin read
+set upd read-write
+set cfg read-write
+set mnt read-write
+end
+next
+end
