@@ -1,0 +1,21 @@
+#examples
+#config firewall addrgrp
+#edit "sh74-public-entire-network"
+#set type ipmask
+#set ip 10.0.1.0 255.255.255.0
+#set allow-routing enable
+#set comment "Example Ship Public Network"
+#next
+#edit "sh74-data-entire-network"
+#set type ipmask
+#set ip 10.0.2.0 255.255.255.0
+#set allow-routing enable
+#set comment "Example Ship Data Network"
+#next
+#edit "sh74-mgmt-entire-network"
+#set type ipmask
+#set ip 10.0.3.0 255.255.255.0
+#set allow-routing enable
+#set comment "Example Ship Mgmt Network"
+#next
+#end

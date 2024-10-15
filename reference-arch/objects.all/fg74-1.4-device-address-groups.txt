@@ -1,0 +1,16 @@
+#ARF project defaults
+config firewall addrgrp
+edit "arf74-blocked-internet-devices"
+append member "arf74-dummy-address"
+next
+edit "arf74-high-priority-devices"
+append member "arf74-dummy-address"
+next
+edit "arf74-low-priority-devices"
+append member "arf74-dummy-address"
+next
+end
+
+#ship specific
+config firewall addrgrp
+end

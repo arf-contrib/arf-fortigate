@@ -1,7 +1,0 @@
-#open page in GUI, wait for zones to no longer be grey
-config router static
-edit 1000
-set distance 1
-set sdwan-zone "hub-shore" "hub-cell" "hub-vsata" "hub-vsatb" "hub-lband" "hub-stara" "hub-starb" "local-shore" "local-cell" "local-vsata" "local-vsatb" "local-lband" "local-stara" "local-starb"
-next
-end

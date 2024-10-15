@@ -1,4 +1,6 @@
 config system sdwan
+set status enable
+
 config zone
 edit "local-shore"
 next
@@ -28,10 +30,16 @@ edit "hub-stara"
 next
 edit "hub-starb"
 next
+delete "virtual-wan-link"
 end
 
 config health-check
-edit "arf74internet"
+delete "Default_DNS"
+delete "Default_Office_365"
+delete "Default_Gmail"
+delete "Default_Google Search"
+delete "Default_FortiGuard"
+edit "internet"
 set server "8.8.8.8"
 set interval 5000
 set probe-timeout 2500
@@ -54,24 +62,41 @@ next
 end
 
 config service
-delete "Default_DNS"
-delete "Default_Office_365"
-delete "Default_Gmail"
-delete "Default_Google Search"
-delete "Default_FortiGuard"
 edit 99
-set name "arf74internet"
+set name "internet"
 set mode sla
 set dst "all"
 set src "all"
 config sla
-edit "arf74internet"
+edit "internet"
 set id 1
 next
 end
 set priority-zone "hub-shore" "hub-cell" "hub-vsata" "hub-vsatb" "hub-lband" "hub-stara" "hub-starb" "local-shore" "local-cell" "local-vsata" "local-vsatb" "local-lband" "local-stara" "local-starb"
 next
 end
-end
+end #config system sdwan
+
+config router static
+edit 1000
+set distance 1
+set comment "Static routes needed to use SDWAN"
+append sdwan-zone "local-shore"
+append sdwan-zone "local-cell"
+append sdwan-zone "local-vsata"
+append sdwan-zone "local-vsatb"
+append sdwan-zone "local-lband"
+append sdwan-zone "local-stara"
+append sdwan-zone "local-starb"
+append sdwan-zone "hub-shore"
+append sdwan-zone "hub-cell"
+append sdwan-zone "hub-vsata"
+append sdwan-zone "hub-vsatb"
+append sdwan-zone "hub-lband"
+append sdwan-zone "hub-stara"
+append sdwan-zone "hub-starb"
+next
+
+end #config router static
 
 

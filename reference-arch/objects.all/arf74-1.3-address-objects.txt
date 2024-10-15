@@ -1,7 +1,0 @@
-config firewall address
-edit "arf74-dummy-address"
-set type ipmask
-set subnet 127.255.255.255 255.255.255.255
-set comment "dummy address so high/low priority groups are not empty"
-next
-end

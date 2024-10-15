@@ -1,0 +1,107 @@
+config firewall ssl-ssh-profile
+edit "arf74-ssl-ssh-profile"
+config https
+set ports 443
+set status certificate-inspection
+end
+config imaps
+set status disable
+end
+config pop3s
+set status disable
+end
+config smtps
+set status disable
+end
+config ssh
+set ports 22
+set status disable
+end
+config dot
+set status disable
+end
+next
+end
+
+config application list
+#shore -> Shorelink
+edit "arf74-shore-application-list"
+set comment "App Blocking on Shore Connections"
+set extended-log enable
+set other-application-log enable
+config entries
+edit 1000
+#allow non-P2P general applications
+set category 3 5 6 7 8 12 15 17 21 22 23 25 26 28 29 30 31 33
+set action pass
+next
+#block P2P
+edit 1001
+set category 2
+next
+#block DNS.over.HTTPS
+edit 1002
+set application 47816
+next
+end
+next
+#underway -> VSAT/Starlink,etc
+edit "arf74-underway-application-list"
+set comment "App Blocking on Underway Connections"
+set extended-log enable
+set other-application-log enable
+config entries
+edit 1000
+#allow non-P2P general applications
+set category 3 5 6 7 8 12 15 17 21 22 23 25 26 28 29 30 31 33
+set action pass
+next
+#block P2P
+edit 1001
+set category 2
+next
+#block DNS.over.HTTPS
+edit 1002
+set application 47816
+next
+end
+next
+end
+
+config ips sensor
+edit "arf74-ips-sensor"
+config entries
+edit 1
+set action pass
+next
+end
+next
+end
+
+config dnsfilter profile
+edit "arf74-dnsfilter-profile"
+config ftgd-dns
+set options error-allow
+end
+set log-all-domain enable
+set block-botnet enable
+next
+end
+
+config firewall profile-group
+#shore profile group -> shorelink, etc
+edit "arf74-shore-profile-group"
+set ssl-ssh-profile "arf74-ssl-ssh-profile"
+set dnsfilter-profile "arf74-dnsfilter-profile"
+set ips-sensor "arf74-ips-sensor"
+set application-list "arf74-shore-application-list"
+next
+#underway profile gorup -> vsat, etc
+edit "arf74-underway-profile-group"
+set ssl-ssh-profile "arf74-ssl-ssh-profile"
+set dnsfilter-profile "arf74-dnsfilter-profile"
+set ips-sensor "arf74-ips-sensor"
+set application-list "arf74-underway-application-list"
+next
+end
+
