@@ -1,0 +1,25 @@
+#!/usr/bin/expect 
+
+set user [lindex $argv 0]
+set host [lindex $argv 1]
+set passwd [lindex $argv 2]
+set vdom  [lindex $argv 3]
+set ip [lindex $argv 4]
+set time [lindex $argv 5]
+
+
+spawn /usr/bin/ssh $user@$host
+expect "$user@$host's password:"
+send -- "$passwd\r"
+expect "#"
+send -- "config vdom\r"
+expect "(vdom) #"
+send -- "edit $vdom\r"
+expect "($vdom) #"
+send -- "diagnose user banned-ip add src4 $ip $time admin\r"
+expect "($vdom) #"
+send -- "next\r"
+expect "(vdom) #"
+send -- "end\r"
+expect "#"
+send -- "exit\r"
