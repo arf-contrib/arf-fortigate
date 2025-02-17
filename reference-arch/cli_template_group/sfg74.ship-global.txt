@@ -7,4 +7,5 @@ sfg74.global.config.04.fortianalzyer.jinja
 sfg74.global.config.06.vdom_link.jinja
 sfg74.global.config.07.vlan_trunk.jinja
 sfg74.global.config.08.mgmt_ddns.jinja
+sfg74.global.config.09SS.wan_ddns.jinja
 

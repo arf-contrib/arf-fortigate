@@ -1,5 +1,5 @@
 #Members
 sfg74.sh-lan.config.01.feature_visibility.jinja
-sfg74.sh-lan.config.02.interface_template.jinja
+sfg74.sh-lan.config.02SS.interface_template.jinja
 sfg74.sh-lan.config.03.shipboard_routing.jinja
 
