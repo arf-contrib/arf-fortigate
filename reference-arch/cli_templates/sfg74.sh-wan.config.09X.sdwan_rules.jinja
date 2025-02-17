@@ -1,11 +1,11 @@
 config system sdwan
 	config service
-    	edit 2
+    	edit 91
         	set name "fast-to-hub1"
         	set load-balance enable
         	set mode sla
         	set dst "all"
-        	set src "en-ship-local-networks"
+        	set src "sh-ship-local-networks"
         	config sla
             	edit "arf74internet"
                 	set id 1
@@ -13,12 +13,12 @@ config system sdwan
         	end
         	set priority-members 13 9
     	next
-    	edit 3
+    	edit 92
         	set name "fast-to-hub2"
         	set load-balance enable
         	set mode sla
         	set dst "all"
-        	set src "en-ship-local-networks"
+        	set src "sh-ship-local-networks"
         	config sla
             	edit "arf74internet"
                 	set id 1
@@ -26,12 +26,12 @@ config system sdwan
         	end
         	set priority-members 16 20
     	next
-    	edit 4
+    	edit 93
         	set name "fast-local"
         	set load-balance enable
         	set mode sla
         	set dst "all"
-        	set src "en-ship-local-networks"
+        	set src "sh-ship-local-networks"
         	config sla
             	edit "arf74internet"
                 	set id 1
@@ -39,12 +39,12 @@ config system sdwan
         	end
         	set priority-members 2 6
     	next
-    	edit 5
+    	edit 94
         	set name "vsat-to-hub1"
         	set load-balance enable
         	set mode sla
         	set dst "all"
-        	set src "en-ship-local-networks"
+        	set src "sh-ship-local-networks"
         	config sla
             	edit "arf74internet"
                 	set id 1
@@ -52,12 +52,12 @@ config system sdwan
         	end
         	set priority-members 10 11
     	next
-    	edit 6
+    	edit 95
         	set name "vsat-to-hub2"
         	set load-balance enable
         	set mode sla
         	set dst "all"
-        	set src "en-ship-local-networks"
+        	set src "sh-ship-local-networks"
         	config sla
             	edit "arf74internet"
                 	set id 1
@@ -65,12 +65,12 @@ config system sdwan
         	end
         	set priority-members 17 18
     	next
-    	edit 7
+    	edit 96
         	set name "vsat-local"
         	set load-balance enable
         	set mode sla
         	set dst "all"
-        	set src "en-ship-local-networks"
+        	set src "sh-ship-local-networks"
         	config sla
             	edit "arf74internet"
                 	set id 1
