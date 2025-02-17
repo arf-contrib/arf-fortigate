@@ -1,0 +1,232 @@
+config vpn ipsec phase1-interface
+	edit "{{all_r2rname}}-h1-shore"
+   		set interface "{{all_r2rname}}-h1-ul"
+    	set ike-version 2
+		set type dynamic
+    	set peertype any
+    	set net-device disable
+    	set mode-cfg enable
+    	set proposal aes256-sha256
+    	set add-route disable
+        set dpd on-idle
+    	set dpd-retrycount 2
+    	set dpd-retryinterval 2
+    	set psksecret {{all_psk}}
+    	set network-overlay enable
+    	set network-id 101
+		set ipv4-start-ip {{all_overlay_prefix}}.101.1
+		set ipv4-end-ip {{all_overlay_prefix}}.101.252
+		set ipv4-netmask 255.255.255.0    
+    next
+    edit "{{all_r2rname}}-h1-cell"
+   		set interface "{{all_r2rname}}-h1-ul"
+    	set ike-version 2
+		set type dynamic
+    	set peertype any
+    	set net-device disable
+    	set mode-cfg enable
+    	set proposal aes256-sha256
+    	set add-route disable
+    	set dpd-retrycount 2
+    	set dpd-retryinterval 2
+    	set psksecret {{all_psk}}
+    	set network-overlay enable
+    	set network-id 102
+		set ipv4-start-ip {{all_overlay_prefix}}.102.1
+		set ipv4-end-ip {{all_overlay_prefix}}.102.252
+		set ipv4-netmask 255.255.255.0     
+    next
+    edit "{{all_r2rname}}-h1-vsata"
+   		set interface "{{all_r2rname}}-h1-ul"
+    	set ike-version 2
+		set type dynamic
+    	set peertype any
+    	set net-device disable
+    	set mode-cfg enable
+    	set proposal aes256-sha256
+    	set add-route disable
+    	set dpd-retrycount 2
+    	set dpd-retryinterval 2
+    	set psksecret {{all_psk}}
+    	set network-overlay enable
+    	set network-id 103
+		set ipv4-start-ip {{all_overlay_prefix}}.103.1
+		set ipv4-end-ip {{all_overlay_prefix}}.103.252
+		set ipv4-netmask 255.255.255.0     
+    next
+    edit "{{all_r2rname}}-h1-vsatb"
+   		set interface "{{all_r2rname}}-h1-ul"
+    	set ike-version 2
+		set type dynamic
+    	set peertype any
+    	set net-device disable
+    	set mode-cfg enable
+    	set proposal aes256-sha256
+    	set add-route disable
+    	set dpd-retrycount 2
+    	set dpd-retryinterval 2
+    	set psksecret {{all_psk}}
+    	set network-overlay enable
+    	set network-id 104
+		set ipv4-start-ip {{all_overlay_prefix}}.104.1
+		set ipv4-end-ip {{all_overlay_prefix}}.104.252
+		set ipv4-netmask 255.255.255.0     
+    next
+    edit "{{all_r2rname}}-h1-lband"
+   		set interface "{{all_r2rname}}-h1-ul"
+    	set ike-version 2
+		set type dynamic
+    	set peertype any
+    	set net-device disable
+    	set mode-cfg enable
+    	set proposal aes256-sha256
+    	set add-route disable
+    	set dpd-retrycount 2
+    	set dpd-retryinterval 2
+    	set psksecret {{all_psk}}
+    	set network-overlay enable
+    	set network-id 105
+		set ipv4-start-ip {{all_overlay_prefix}}.105.1
+		set ipv4-end-ip {{all_overlay_prefix}}.105.252
+		set ipv4-netmask 255.255.255.0     
+    next
+    edit "{{all_r2rname}}-h1-stara"
+   		set interface "{{all_r2rname}}-h1-ul"
+    	set ike-version 2
+		set type dynamic
+    	set peertype any
+    	set net-device disable
+    	set mode-cfg enable
+    	set proposal aes256-sha256
+    	set add-route disable
+    	set dpd-retrycount 2
+    	set dpd-retryinterval 2
+    	set psksecret {{all_psk}}
+    	set network-overlay enable
+    	set network-id 106
+		set ipv4-start-ip {{all_overlay_prefix}}.106.1
+		set ipv4-end-ip {{all_overlay_prefix}}.106.252
+		set ipv4-netmask 255.255.255.0     
+    next
+    edit "{{all_r2rname}}-h1-starb"
+   		set interface "{{all_r2rname}}-h1-ul"
+    	set ike-version 2
+		set type dynamic
+    	set peertype any
+    	set net-device disable
+    	set mode-cfg enable
+    	set proposal aes256-sha256
+    	set add-route disable
+    	set dpd-retrycount 2
+    	set dpd-retryinterval 2
+    	set psksecret {{all_psk}}
+    	set network-overlay enable
+    	set network-id 107
+		set ipv4-start-ip {{all_overlay_prefix}}.107.1
+		set ipv4-end-ip {{all_overlay_prefix}}.107.252
+		set ipv4-netmask 255.255.255.0     
+	next
+end
+
+config vpn ipsec phase2-interface
+	edit "{{all_r2rname}}-h1-shore"
+    	set proposal aes256-sha256
+        set replay disable
+        set phase1name "{{all_r2rname}}-h1-shore"  
+    next
+    edit "{{all_r2rname}}-h1-cell"
+    	set proposal aes256-sha256
+        set replay disable
+        set phase1name "{{all_r2rname}}-h1-cell"
+    next
+    edit "{{all_r2rname}}-h1-vsata"
+    	set proposal aes256-sha256
+        set replay disable   
+        set phase1name "{{all_r2rname}}-h1-vsata"
+    next
+    edit "{{all_r2rname}}-h1-vsatb"
+    	set proposal aes256-sha256
+        set replay disable    
+        set phase1name "{{all_r2rname}}-h1-vsatb"
+    next
+    edit "{{all_r2rname}}-h1-lband"
+    	set proposal aes256-sha256
+        set replay disable
+        set phase1name "{{all_r2rname}}-h1-lband"
+    next
+    edit "{{all_r2rname}}-h1-stara"
+    	set proposal aes256-sha256
+        set replay disable 
+        set phase1name "{{all_r2rname}}-h1-stara"
+    next
+    edit "{{all_r2rname}}-h1-starb"
+    	set proposal aes256-sha256
+        set replay disable
+        set phase1name "{{all_r2rname}}-h1-starb"
+end
+
+config system interface
+	edit "{{all_r2rname}}-h1-shore"
+    	set vdom "{{all_r2rname}}-h1"
+        set interface "{{all_r2rname}}-h1-ul"
+        set allowaccess ping
+        set type tunnel
+		set ip {{all_overlay_prefix}}.101.253 255.255.255.255
+		set remote-ip {{all_overlay_prefix}}.101.254 255.255.255.0
+        set outbandwidth {{shwan_shore_download}}
+    next
+    edit "{{all_r2rname}}-h1-cell"
+    	set vdom "{{all_r2rname}}-h1"
+        set interface "{{all_r2rname}}-h1-ul"
+        set allowaccess ping
+        set type tunnel
+		set ip {{all_overlay_prefix}}.102.253 255.255.255.255
+		set remote-ip {{all_overlay_prefix}}.102.254 255.255.255.0
+        set outbandwidth {{shwan_cell_download}}     
+    next
+    edit "{{all_r2rname}}-h1-vsata"
+    	set vdom "{{all_r2rname}}-h1"
+        set interface "{{all_r2rname}}-h1-ul"
+        set allowaccess ping
+        set type tunnel
+		set ip {{all_overlay_prefix}}.103.253 255.255.255.255
+		set remote-ip {{all_overlay_prefix}}.103.254 255.255.255.0
+        set outbandwidth {{shwan_vsata_download}}        
+    next
+    edit "{{all_r2rname}}-h1-vsatb"
+    	set vdom "{{all_r2rname}}-h1"
+        set interface "{{all_r2rname}}-h1-ul"
+        set allowaccess ping
+        set type tunnel
+		set ip {{all_overlay_prefix}}.104.253 255.255.255.255
+		set remote-ip {{all_overlay_prefix}}.104.254 255.255.255.0
+        set outbandwidth {{shwan_vsatb_download}}        
+    next
+    edit "{{all_r2rname}}-h1-lband"
+    	set vdom "{{all_r2rname}}-h1"
+        set interface "{{all_r2rname}}-h1-ul"
+        set allowaccess ping
+        set type tunnel
+		set ip {{all_overlay_prefix}}.105.253 255.255.255.255
+		set remote-ip {{all_overlay_prefix}}.105.254 255.255.255.0
+        set outbandwidth {{shwan_lband_download}}
+    next
+    edit "{{all_r2rname}}-h1-stara"
+    	set vdom "{{all_r2rname}}-h1"
+        set interface "{{all_r2rname}}-h1-ul"
+        set allowaccess ping
+        set type tunnel
+		set ip {{all_overlay_prefix}}.106.253 255.255.255.255
+		set remote-ip {{all_overlay_prefix}}.106.254 255.255.255.0
+        set outbandwidth {{shwan_stara_download}}
+    next
+    edit "{{all_r2rname}}-h1-starb"
+    	set vdom "{{all_r2rname}}-h1"
+        set interface "{{all_r2rname}}-h1-ul"
+        set allowaccess ping
+        set type tunnel
+		set ip {{all_overlay_prefix}}.107.253 255.255.255.255
+		set remote-ip {{all_overlay_prefix}}.107.254 255.255.255.0
+        set outbandwidth {{shwan_starb_download}}
+    next
+end

@@ -1,0 +1,24 @@
+#h1 vdom loopback
+config system interface
+	edit "{{all_r2rname}}-h2-lo1"
+    	set vdom "{{all_r2rname}}-h2"
+    	set type loopback
+        set ip {{h2_loopback_ip}} 255.255.255.255
+        set allowaccess ping
+    next
+end
+
+#Underlay interfaces at the hub
+#This also serves as the parent interface for the hub tunnels
+config system interface
+	edit "{{all_r2rname}}-h2-ul"
+		set vdom "{{all_r2rname}}-h2"
+		set type vlan
+		set interface "trunk"
+		set role wan
+		set allowaccess ping
+		set vlanid {{h2_wan_vlanid}}
+		set mode static
+		set ip {{h2_wan_ip}} {{h2_wan_mask}}
+	next
+end

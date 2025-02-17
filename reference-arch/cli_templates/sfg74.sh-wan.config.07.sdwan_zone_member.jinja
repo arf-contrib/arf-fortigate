@@ -1,0 +1,127 @@
+config system sdwan
+	set status enable
+    config zone
+    	edit "local-shore"
+        next
+        edit "local-cell"
+        next
+        edit "local-vsata"
+        next
+        edit "local-vsatb"
+        next
+        edit "local-lband"
+        next
+        edit "local-stara"
+        next
+        edit "local-starb"
+        next
+       	edit "hub-shore"
+        next
+        edit "hub-cell"
+        next
+        edit "hub-vsata"
+        next
+        edit "hub-vsatb"
+        next
+        edit "hub-lband"
+        next
+        edit "hub-stara"
+        next
+        edit "hub-starb"
+        next
+    end #end zone
+    config members
+    	edit 1
+        	set interface "{{all_r2rname}}-ul-shore"
+            set zone "local-shore"
+            set gateway {{shwan_shore_localgw}}
+        next
+        edit 2
+            set interface "{{all_r2rname}}-ul-cell"
+            set zone "local-cell"
+            set gateway {{shwan_cell_localgw}}
+        next
+        edit 3
+        	set interface "{{all_r2rname}}-ul-vsata"
+            set zone "local-vsata"
+            set gateway {{shwan_vsata_localgw}}
+        next
+        edit 4
+        	set interface "{{all_r2rname}}-ul-vsatb"
+            set zone "local-vsatb"
+            set gateway {{shwan_vsatb_localgw}}
+        next
+        edit 5
+        	set interface "{{all_r2rname}}-ul-lband"
+            set zone "local-lband"
+            set gateway {{shwan_lband_localgw}}
+        next
+        edit 6
+        	set interface "{{all_r2rname}}-ul-stara"
+            set zone "local-stara"
+            set gateway {{shwan_stara_localgw}}
+        next
+        edit 7
+        	set interface "{{all_r2rname}}-ul-starb"
+            set zone "local-starb"
+            set gateway {{shwan_starb_localgw}}
+        next
+        edit 8
+        	set interface "{{all_r2rname}}-h1-shore"
+            set zone "hub-shore" 
+        next
+        edit 9
+        	set interface "{{all_r2rname}}-h1-cell"
+            set zone "hub-cell"
+        next
+        edit 10
+        	set interface "{{all_r2rname}}-h1-vsata"
+            set zone "hub-vsata"
+        next
+        edit 11
+        	set interface "{{all_r2rname}}-h1-vsatb"
+            set zone "hub-vsatb"
+        next
+        edit 12
+        	set interface "{{all_r2rname}}-h1-lband"
+            set zone "hub-lband"
+        next
+        edit 13
+        	set interface "{{all_r2rname}}-h1-stara"
+            set zone "hub-stara"
+        next
+        edit 14
+        	set interface "{{all_r2rname}}-h1-starb"
+            set zone "hub-starb"
+        next
+        edit 15
+        	set interface "{{all_r2rname}}-h2-shore"
+            set zone "hub-shore" 
+        next
+        edit 16
+        	set interface "{{all_r2rname}}-h2-cell"
+            set zone "hub-cell"
+        next
+        edit 17
+        	set interface "{{all_r2rname}}-h2-vsata"
+            set zone "hub-vsata"
+        next
+        edit 18
+        	set interface "{{all_r2rname}}-h2-vsatb"
+            set zone "hub-vsatb"
+        next
+        edit 19
+        	set interface "{{all_r2rname}}-h2-lband"
+            set zone "hub-lband"
+        next
+        edit 20
+        	set interface "{{all_r2rname}}-h2-stara"
+            set zone "hub-stara"
+        next
+        edit 21
+        	set interface "{{all_r2rname}}-h2-starb"
+            set zone "hub-starb"
+        next
+	end #end members
+end
+    	

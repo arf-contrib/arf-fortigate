@@ -1,0 +1,11 @@
+#members
+sfg74.sh-wan.config.01.feature_visibility.jinja
+sfg74.sh-wan.config.02.underlay_interface.jinja
+sfg74.sh-wan.config.03X.shipboard_routing.jinja
+sfg74.sh-wan.config.04.h1_overlay_interface.jinja
+sfg74.sh-wan.config.05.h2_overlay_internet.jinja
+sfg74.sh-wan.config.06X.overlay_routing.jinja
+sfg74.sh-wan.config.07.sdwan_zone_member.jinja
+sfg74.sh-wan.config.08.sdwan_health_check.jinja
+sfg74.sh-wan.config.09.sdwan_rules.jinja
+sfg74.sh-wan.config.10.sdwan_static_route.jinja

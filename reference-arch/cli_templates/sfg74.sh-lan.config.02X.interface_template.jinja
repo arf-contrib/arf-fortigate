@@ -1,0 +1,37 @@
+#lan vdom loopback
+config system interface
+	edit "{{all_r2rname}}-lan-lo1"
+    	set vdom "{{all_r2rname}}-lan"
+    	set type loopback
+        set ip {{shlan_loopback_ip}} 255.255.255.255
+        set allowaccess ping
+    next
+end
+
+#LAN INTERFACE CONFIG
+#EXAMPLE - entry for _each_ ship network onboard
+#In this section, we are just _defining_ networks
+#We will set up DHCP and DNS later in this file
+#config system interface
+#	edit "trunk-10"
+#		set vdom "{{all_r2rname}}-lan"
+#		set type vlan
+#		set interface "trunk"
+#		set mode static
+#		set role lan
+#		set allowaccess ping
+#		set alias "Example Public Network"
+#		set vlanid 10
+#		set ip 192.168.10.1 255.255.255.0
+#	next
+#	edit "trunk-20"
+#		set vdom "{{all_r2rname}}-lan"
+#		set type vlan
+#		set interface "trunk"
+#		set mode static
+#		set role lan
+#		set allowaccess ping
+#		set alias "Example Data Network"
+#		set vlanid 20
+#		set ip 192.168.20.1 255.255.255.0
+#	next
