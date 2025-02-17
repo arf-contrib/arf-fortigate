@@ -1,9 +1,0 @@
-#config firewall addrgrp
-#edit "sh74-ship-all-networks"
-#set comment "All onboard networks on example ship"
-#append member "sh74-public-entire-network"
-#append member "sh74-data-entire-network"
-#append member "sh74-mgmt-entire-network"
-#set allow-routing enable
-#next
-#end
