@@ -1,0 +1,20 @@
+#NOT NEEDED in v7.4.5 - caused duplicate packet issue
+config router static
+	edit 1000
+    	set dst 0.0.0.0/0
+        append sdwan-zone "local-shore"
+        append sdwan-zone "local-cell"
+        append sdwan-zone "local-vsata"
+        append sdwan-zone "local-vsatb"
+        append sdwan-zone "local-lband"
+        append sdwan-zone "local-stara"
+        append sdwan-zone "local-starb"
+        append sdwan-zone "hub-shore"
+        append sdwan-zone "hub-cell"
+        append sdwan-zone "hub-vsata"
+        append sdwan-zone "hub-vsatb"
+        append sdwan-zone "hub-lband"
+        append sdwan-zone "hub-stara"
+        append sdwan-zone "hub-starb"
+    next
+end

@@ -1,0 +1,105 @@
+#wan vdom loopback
+config system interface
+	edit "{{all_r2rname}}-wan-lo1"
+    	set vdom "{{all_r2rname}}-wan"
+    	set type loopback
+        set ip {{shwan_loopback_ip}} 255.255.255.255
+        set allowaccess ping
+    next
+end
+
+#Underlay interfaces for Local internet access
+#These also serve as the parent interfaces for the hub tunnels
+config system interface
+	edit "{{all_r2rname}}-ul-shore"
+		set vdom "{{all_r2rname}}-wan"
+		set type vlan
+		set interface "trunk"
+		set role wan
+		set allowaccess ping
+		set vlanid {{shwan_shore_vlanid}}
+		set alias "{{shwan_shore_alias}} Local"
+		set mode {{shwan_shore_mode}}
+        {%- if shwan_shore_mode == 'static' %}
+		set ip {{shwan_shore_ipmask}}
+        {%- endif %}
+	next
+	edit "{{all_r2rname}}-ul-cell"
+		set vdom "{{all_r2rname}}-wan"
+		set type vlan
+		set interface "trunk"
+		set role wan
+		set allowaccess ping
+        set vlanid {{shwan_cell_vlanid}}
+		set alias "{{shwan_cell_alias}} Local"
+		set mode {{shwan_cell_mode}}
+        {%- if shwan_cell_mode == 'static' %}
+		set ip {{shwan_cell_ipmask}}
+        {%- endif %}
+	next
+    edit "{{all_r2rname}}-ul-vsata"
+		set vdom "{{all_r2rname}}-wan"
+		set type vlan
+		set interface "trunk"
+		set role wan
+		set allowaccess ping
+        set vlanid {{shwan_vsata_vlanid}}
+		set alias "{{shwan_vsata_alias}} Local"
+		set mode {{shwan_vsata_mode}}
+        {%- if shwan_vsata_mode == 'static' %}
+		set ip {{shwan_vsata_ipmask}}
+        {%- endif %}
+	next
+	edit "{{all_r2rname}}-ul-vsatb"
+		set vdom "{{all_r2rname}}-wan"
+		set type vlan
+		set interface "trunk"
+		set role wan
+		set allowaccess ping
+        set vlanid {{shwan_vsatb_vlanid}}
+		set alias "{{shwan_vsatb_alias}} Local"
+		set mode {{shwan_vsatb_mode}}
+        {%- if shwan_vsatb_mode == 'static' %}
+		set ip {{shwan_vsatb_ipmask}}
+        {%- endif %}
+	next
+	edit "{{all_r2rname}}-ul-lband"
+		set vdom "{{all_r2rname}}-wan"
+		set type vlan
+		set interface "trunk"
+		set role wan
+		set allowaccess ping
+        set vlanid {{shwan_lband_vlanid}}
+		set alias "{{shwan_lband_alias}} Local"
+		set mode {{shwan_lband_mode}}
+        {%- if shwan_lband_mode == 'static' %}
+		set ip {{shwan_lband_ipmask}}
+        {%- endif %}
+	next
+	edit "{{all_r2rname}}-ul-stara"
+		set vdom "{{all_r2rname}}-wan"
+		set type vlan
+		set interface "trunk"
+		set role wan
+		set allowaccess ping
+		set vlanid {{shwan_stara_vlanid}}
+		set alias "{{shwan_stara_alias}} Local"
+		set mode {{shwan_stara_mode}}
+        {%- if shwan_stara_mode == 'static' %}
+		set ip {{shwan_stara_ipmask}}
+        {%- endif %}        
+	next
+	edit "{{all_r2rname}}-ul-starb"
+		set vdom "{{all_r2rname}}-wan"
+		set type vlan
+		set interface "trunk"
+		set role wan
+		set allowaccess ping
+        set vlanid {{shwan_starb_vlanid}}
+		set alias "{{shwan_starb_alias}} Local"
+		set mode {{shwan_starb_mode}}
+        {%- if shwan_starb_mode == 'static' %}
+		set ip {{shwan_starb_ipmask}}
+        {%- endif %}
+	next
+end

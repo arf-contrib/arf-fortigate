@@ -1,0 +1,274 @@
+config vpn ipsec phase1-interface
+	edit "{{all_r2rname}}-h2-shore"
+    	set interface "{{all_r2rname}}-ul-shore"
+        set ike-version 2
+        set peertype any
+        set net-device enable
+        set mode-cfg enable
+        set proposal aes256-sha256
+        set add-route disable
+        set negotiate-timeout 5
+        set idle-timeout enable
+        set dpd-retrycount 2
+        set dpd-retryinterval 2
+		set localid "{{all_r2rname}}-h2-shore"
+        set remote-gw {{h2_wan_ip}}
+        set psksecret {{all_psk}}
+        set network-overlay enable
+        set network-id 201
+        {%- if shwan_shore_mode == 'static' %}
+		set default-gw {{shwan_shore_localgw}}
+        {%- endif %}
+    next
+ 	edit "{{all_r2rname}}-h2-cell"
+    	set interface "{{all_r2rname}}-ul-cell"
+        set ike-version 2
+        set peertype any
+        set net-device enable
+        set mode-cfg enable
+        set proposal aes256-sha256
+        set add-route disable
+        set negotiate-timeout 5
+        set idle-timeout enable
+        set dpd-retrycount 2
+        set dpd-retryinterval 2
+		set localid "{{all_r2rname}}-h2-cell"
+        set remote-gw {{h2_wan_ip}}
+        set psksecret {{all_psk}}
+        set network-overlay enable
+        set network-id 202  
+        {%- if shwan_cell_mode == 'static' %}
+		set default-gw {{shwan_cell_localgw}}
+        {%- endif %}
+    next
+	edit "{{all_r2rname}}-h2-vsata"
+    	set interface "{{all_r2rname}}-ul-vsata"
+        set ike-version 2
+        set peertype any
+        set net-device enable
+        set mode-cfg enable
+        set proposal aes256-sha256
+        set add-route disable
+        set negotiate-timeout 5
+        set idle-timeout enable
+        set dpd-retrycount 2
+        set dpd-retryinterval 2
+		set localid "{{all_r2rname}}-h2-vsata"
+        set remote-gw {{h2_wan_ip}}
+        set psksecret {{all_psk}}
+        set network-overlay enable
+        set network-id 203
+        {%- if shwan_vsata_mode == 'static' %}
+		set default-gw {{shwan_vsata_localgw}}
+        {%- endif %}
+    next
+	edit "{{all_r2rname}}-h2-vsatb"
+    	set interface "{{all_r2rname}}-ul-vsatb"
+        set ike-version 2
+        set peertype any
+        set net-device enable
+        set mode-cfg enable
+        set proposal aes256-sha256
+        set add-route disable
+        set negotiate-timeout 5
+        set idle-timeout enable
+        set dpd-retrycount 2
+        set dpd-retryinterval 2
+		set localid "{{all_r2rname}}-h2-vsatb"
+        set remote-gw {{h2_wan_ip}}
+        set psksecret {{all_psk}}
+        set network-overlay enable
+        set network-id 204   
+        {%- if shwan_vsatb_mode == 'static' %}
+		set default-gw {{shwan_vsatb_localgw}}
+        {%- endif %}
+    next
+	edit "{{all_r2rname}}-h2-lband"
+    	set interface "{{all_r2rname}}-ul-lband"
+        set ike-version 2
+        set peertype any
+        set net-device enable
+        set mode-cfg enable
+        set proposal aes256-sha256
+        set add-route disable
+        set negotiate-timeout 5
+        set idle-timeout enable
+        set dpd-retrycount 2
+        set dpd-retryinterval 2
+		set localid "{{all_r2rname}}-h2-lband"
+        set remote-gw {{h2_wan_ip}}
+        set psksecret {{all_psk}}
+        set network-overlay enable
+        set network-id 205     
+        {%- if shwan_lband_mode == 'static' %}
+		set default-gw {{shwan_lband_localgw}}
+        {%- endif %}
+    next
+	edit "{{all_r2rname}}-h2-stara"
+    	set interface "{{all_r2rname}}-ul-stara"
+        set ike-version 2
+        set peertype any
+        set net-device enable
+        set mode-cfg enable
+        set proposal aes256-sha256
+        set add-route disable
+        set negotiate-timeout 5
+        set idle-timeout enable
+        set dpd-retrycount 2
+        set dpd-retryinterval 2
+		set localid "{{all_r2rname}}-h2-stara"
+        set remote-gw {{h2_wan_ip}}
+        set psksecret {{all_psk}}
+        set network-overlay enable
+        set network-id 206 
+        {%- if shwan_stara_mode == 'static' %}
+		set default-gw {{shwan_stara_localgw}}
+        {%- endif %}
+    next
+	edit "{{all_r2rname}}-h2-starb"
+    	set interface "{{all_r2rname}}-ul-starb"
+        set ike-version 2
+        set peertype any
+        set net-device enable
+        set mode-cfg enable
+        set proposal aes256-sha256
+        set add-route disable
+        set negotiate-timeout 5
+        set idle-timeout enable
+        set dpd-retrycount 2
+        set dpd-retryinterval 2
+		set localid "{{all_r2rname}}-h2-starb"
+        set remote-gw {{h2_wan_ip}}
+        set psksecret {{all_psk}}
+        set network-overlay enable
+        set network-id 207
+        {%- if shwan_starb_mode == 'static' %}
+		set default-gw {{shwan_starb_localgw}}
+        {%- endif %}
+    next
+end
+
+config vpn ipsec phase2-interface
+	edit "{{all_r2rname}}-h2-shore"
+    	set phase1name "{{all_r2rname}}-h2-shore"
+		set proposal aes256-sha256
+        set auto-negotiate enable
+		set replay disable        
+    next
+ 	edit "{{all_r2rname}}-h2-cell"
+    	set phase1name "{{all_r2rname}}-h2-cell"
+		set proposal aes256-sha256
+        set auto-negotiate enable   
+		set replay disable        
+    next
+	edit "{{all_r2rname}}-h2-vsata"
+    	set phase1name "{{all_r2rname}}-h2-vsata"
+		set proposal aes256-sha256
+        set auto-negotiate enable
+		set replay disable        
+    next
+	edit "{{all_r2rname}}-h2-vsatb"
+    	set phase1name "{{all_r2rname}}-h2-vsatb"
+		set proposal aes256-sha256
+        set auto-negotiate enable
+		set replay disable        
+    next
+	edit "{{all_r2rname}}-h2-lband"
+    	set phase1name "{{all_r2rname}}-h2-lband"
+		set proposal aes256-sha256
+        set auto-negotiate enable   
+		set replay disable        
+    next
+	edit "{{all_r2rname}}-h2-stara"
+    	set phase1name "{{all_r2rname}}-h2-stara"
+		set proposal aes256-sha256
+        set auto-negotiate enable 
+		set replay disable        
+    next
+	edit "{{all_r2rname}}-h2-starb"
+    	set phase1name "{{all_r2rname}}-h2-starb"
+		set proposal aes256-sha256
+        set auto-negotiate enable 
+		set replay disable        
+    next
+end
+
+config system interface
+	edit "{{all_r2rname}}-h2-shore"
+    	set vdom "{{all_r2rname}}-wan"		
+    	set allowaccess ping
+        set type tunnel
+        set role wan
+        set monitor-bandwidth enable
+        set alias "{{shwan_shore_alias}} to Hub2"
+        set outbandwidth {{shwan_shore_upload}}
+        set estimated-upstream-bandwidth {{shwan_shore_upload}}
+        set estimated-downstream-bandwidth {{shwan_shore_download}}    
+    next
+ 	edit "{{all_r2rname}}-h2-cell"
+    	set vdom "{{all_r2rname}}-wan"
+        set allowaccess ping
+        set type tunnel
+        set role wan
+        set monitor-bandwidth enable
+        set alias "{{shwan_cell_alias}} to Hub2"
+        set outbandwidth {{shwan_cell_upload}}
+        set estimated-upstream-bandwidth {{shwan_cell_upload}}
+        set estimated-downstream-bandwidth {{shwan_cell_download}}
+    next
+	edit "{{all_r2rname}}-h2-vsata"
+    	set vdom "{{all_r2rname}}-wan"
+        set allowaccess ping
+        set type tunnel
+        set role wan
+        set monitor-bandwidth enable
+        set alias "{{shwan_vsata_alias}} to Hub2"
+        set outbandwidth {{shwan_vsata_upload}}
+        set estimated-upstream-bandwidth {{shwan_vsata_upload}}
+        set estimated-downstream-bandwidth {{shwan_vsata_download}}
+    next
+	edit "{{all_r2rname}}-h2-vsatb"
+    	set vdom "{{all_r2rname}}-wan"
+        set allowaccess ping
+        set type tunnel
+        set role wan
+        set monitor-bandwidth enable
+        set alias "{{shwan_vsatb_alias}} to Hub2"
+        set outbandwidth {{shwan_vsatb_upload}}
+        set estimated-upstream-bandwidth {{shwan_vsatb_upload}}
+        set estimated-downstream-bandwidth {{shwan_vsatb_download}}
+    next
+	edit "{{all_r2rname}}-h2-lband"
+    	set vdom "{{all_r2rname}}-wan"
+        set allowaccess ping
+        set type tunnel
+        set role wan
+        set monitor-bandwidth enable
+        set alias "{{shwan_lband_alias}} to Hub2"
+        set outbandwidth {{shwan_lband_upload}}
+        set estimated-upstream-bandwidth {{shwan_lband_upload}}
+        set estimated-downstream-bandwidth {{shwan_lband_download}}
+    next
+	edit "{{all_r2rname}}-h2-stara"
+    	set vdom "{{all_r2rname}}-wan"
+        set allowaccess ping
+        set type tunnel
+        set role wan
+        set monitor-bandwidth enable
+        set alias "{{shwan_stara_alias}} to Hub2"
+        set outbandwidth {{shwan_stara_upload}}
+        set estimated-upstream-bandwidth {{shwan_stara_upload}}
+        set estimated-downstream-bandwidth {{shwan_stara_download}}
+    next
+	edit "{{all_r2rname}}-h2-starb"
+    	set vdom "{{all_r2rname}}-wan"
+        set allowaccess ping
+        set type tunnel
+        set role wan
+        set monitor-bandwidth enable
+        set alias "{{shwan_starb_alias}} to Hub2"
+        set outbandwidth {{shwan_starb_upload}}
+        set estimated-upstream-bandwidth {{shwan_starb_upload}}
+        set estimated-downstream-bandwidth {{shwan_starb_download}}
+    next
+end

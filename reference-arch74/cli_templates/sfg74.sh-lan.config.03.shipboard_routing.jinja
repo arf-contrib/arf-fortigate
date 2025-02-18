@@ -1,0 +1,9 @@
+config router static
+	#static route to WAN VDOM
+	edit 1
+    	set dst 0.0.0.0/0
+        set device {{shvdomlink_name}}1
+        set gateway {{shvdomlink_wan_ip}}
+    next
+end
+        

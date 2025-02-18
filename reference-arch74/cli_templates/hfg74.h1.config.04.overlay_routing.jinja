@@ -1,0 +1,154 @@
+config router static
+	edit 1
+    	set dst 0.0.0.0/0
+        set gateway {{h1_wan_localgw}}
+        set device "{{all_r2rname}}-h1-ul"
+    next
+end
+
+config router bgp
+    set as {{all_bgp_as}}
+    set router-id {{h1_loopback_ip}}
+    set keepalive-timer 5
+    set holdtime-timer 360
+    set ibgp-multipath enable
+    set recursive-next-hop enable
+    set scan-time 0
+    config neighbor-group
+        edit "{{all_r2rname}}-h1-shore"
+            set activate6 disable
+            set capability-graceful-restart enable
+            set capability-default-originate enable
+            set link-down-failover enable
+            set next-hop-self enable
+            set soft-reconfiguration enable
+            set interface "{{all_r2rname}}-h1-shore"
+            set remote-as {{all_bgp_as}}
+            set route-reflector-client enable
+        next
+        edit "{{all_r2rname}}-h1-cell"
+            set activate6 disable
+            set capability-graceful-restart enable
+            set capability-default-originate enable
+            set link-down-failover enable
+            set next-hop-self enable
+            set soft-reconfiguration enable
+            set interface "{{all_r2rname}}-h1-cell"
+            set remote-as {{all_bgp_as}}
+            set route-reflector-client enable
+        next
+        edit "{{all_r2rname}}-h1-vsata"
+            set activate6 disable
+            set capability-graceful-restart enable
+            set capability-default-originate enable
+            set link-down-failover enable
+            set next-hop-self enable
+            set soft-reconfiguration enable
+            set interface "{{all_r2rname}}-h1-vsata"
+            set remote-as {{all_bgp_as}}
+            set route-reflector-client enable
+        next
+        edit "{{all_r2rname}}-h1-vsatb"
+            set activate6 disable
+            set capability-graceful-restart enable
+            set capability-default-originate enable
+            set link-down-failover enable
+            set next-hop-self enable
+            set soft-reconfiguration enable
+            set interface "{{all_r2rname}}-h1-vsatb"
+            set remote-as {{all_bgp_as}}
+            set route-reflector-client enable
+        next
+        edit "{{all_r2rname}}-h1-lband"
+            set activate6 disable
+            set capability-graceful-restart enable
+            set capability-default-originate enable
+            set link-down-failover enable
+            set next-hop-self enable
+            set soft-reconfiguration enable
+            set interface "{{all_r2rname}}-h1-lband"
+            set remote-as {{all_bgp_as}}
+            set route-reflector-client enable
+        next
+        edit "{{all_r2rname}}-h1-stara"
+            set activate6 disable
+            set capability-graceful-restart enable
+            set capability-default-originate enable
+            set link-down-failover enable
+            set next-hop-self enable
+            set soft-reconfiguration enable
+            set interface "{{all_r2rname}}-h1-stara"
+            set remote-as {{all_bgp_as}}
+            set route-reflector-client enable
+        next
+        edit "{{all_r2rname}}-h1-starb"
+            set activate6 disable
+            set capability-graceful-restart enable
+            set capability-default-originate enable
+            set link-down-failover enable
+            set next-hop-self enable
+            set soft-reconfiguration enable
+            set interface "{{all_r2rname}}-h1-starb"
+            set remote-as {{all_bgp_as}}
+            set route-reflector-client enable
+        next
+    end
+    config neighbor-range
+        edit 1
+            set prefix {{all_overlay_prefix}}.101.0 255.255.255.0
+            set neighbor-group "{{all_r2rname}}-h1-shore"
+        next
+        edit 2
+            set prefix {{all_overlay_prefix}}.102.0 255.255.255.0
+            set neighbor-group "{{all_r2rname}}-h1-cell"
+        next
+        edit 3
+            set prefix {{all_overlay_prefix}}.103.0 255.255.255.0
+            set neighbor-group "{{all_r2rname}}-h1-vsata"
+        next
+        edit 4
+            set prefix {{all_overlay_prefix}}.104.0 255.255.255.0
+            set neighbor-group "{{all_r2rname}}-h1-vsatb"
+        next
+        edit 5
+            set prefix {{all_overlay_prefix}}.105.0 255.255.255.0
+            set neighbor-group "{{all_r2rname}}-h1-lband"
+        next
+        edit 6
+            set prefix {{all_overlay_prefix}}.106.0 255.255.255.0
+            set neighbor-group "{{all_r2rname}}-h1-stara"
+        next
+        edit 7
+            set prefix {{all_overlay_prefix}}.107.0 255.255.255.0
+            set neighbor-group "{{all_r2rname}}-h1-starb"
+        next
+    end
+    config network
+    	#announce my loopback
+    	edit 1000
+        	set prefix {{h1_loopback_ip}} 255.255.255.255
+        next
+        #annouce ipsec transit networks
+        edit 1001
+        	set prefix {{all_overlay_prefix}}.101.0 255.255.255.0
+        next
+        edit 1002
+        	set prefix {{all_overlay_prefix}}.102.0 255.255.255.0
+        next
+        edit 1003
+        	set prefix {{all_overlay_prefix}}.103.0 255.255.255.0
+        next
+        edit 1004
+        	set prefix {{all_overlay_prefix}}.104.0 255.255.255.0
+        next
+        edit 1005
+        	set prefix {{all_overlay_prefix}}.105.0 255.255.255.0
+        next
+        edit 1006
+        	set prefix {{all_overlay_prefix}}.106.0 255.255.255.0
+        next
+        edit 1007
+        	set prefix {{all_overlay_prefix}}.107.0 255.255.255.0
+        next
+    end
+end

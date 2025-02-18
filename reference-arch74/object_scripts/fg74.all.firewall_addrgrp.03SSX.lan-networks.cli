@@ -1,0 +1,6 @@
+config firewall addrgrp
+    edit "ship-all-networks"
+        # add entries for all onboard networks...
+        set member ""
+    next
+end

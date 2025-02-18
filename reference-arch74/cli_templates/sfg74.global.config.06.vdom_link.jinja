@@ -1,0 +1,18 @@
+#define vdom-link interface
+config system vdom-link
+	edit "{{shvdomlink_name}}"
+    next
+end
+#configure vdom-link IPs
+config system interface
+	edit "{{shvdomlink_name}}0"
+    	set vdom "{{all_r2rname}}-wan"
+        set ip {{shvdomlink_wan_ip}} {{shvdomlink_wan_mask}}
+        set allowaccess ping
+    next
+    edit "{{shvdomlink_name}}1"
+    	set vdom "{{all_r2rname}}-lan"
+        set ip {{shvdomlink_lan_ip}} {{shvdomlink_lan_mask}}
+        set allowaccess ping
+    next
+end

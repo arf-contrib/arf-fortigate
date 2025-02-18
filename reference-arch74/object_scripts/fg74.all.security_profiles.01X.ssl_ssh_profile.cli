@@ -1,0 +1,24 @@
+config firewall ssl-ssh-profile
+    edit "arf74-ssl-ssh-profile"
+        config https
+            set ports 443
+            set status certificate-inspection
+        end
+        config imaps
+            set status disable
+        end
+        config pop3s
+            set status disable
+        end
+        config smtps
+            set status disable
+        end
+        config ssh
+            set ports 22
+            set status disable
+        end
+        config dot
+            set status disable
+        end 
+    next
+end 

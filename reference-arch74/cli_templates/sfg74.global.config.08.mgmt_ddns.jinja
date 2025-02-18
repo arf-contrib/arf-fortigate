@@ -1,0 +1,12 @@
+#DDNS for the management-vdom interface... all traffic
+#originating on the fortigate going directly on the public
+#internet will have this apparent IP address.
+config system ddns
+	edit 99
+    	set ddns-server FortiGuardDDNS
+        set ddns-domain "arf-{{all_r2rname}}-root-mgmt.fortiddns.com"
+        set use-public-ip enable
+        set update-interval 300
+        set monitor-interface "{{shroot_mgmt_interface}}"
+    next
+end

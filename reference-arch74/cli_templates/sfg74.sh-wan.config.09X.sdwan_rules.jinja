@@ -1,0 +1,82 @@
+config system sdwan
+	config service
+    	edit 91
+        	set name "fast-to-hub1"
+        	set load-balance enable
+        	set mode sla
+        	set dst "all"
+        	set src "sh-ship-local-networks"
+        	config sla
+            	edit "arf74internet"
+                	set id 1
+            	next
+        	end
+        	set priority-members 13 9
+    	next
+    	edit 92
+        	set name "fast-to-hub2"
+        	set load-balance enable
+        	set mode sla
+        	set dst "all"
+        	set src "sh-ship-local-networks"
+        	config sla
+            	edit "arf74internet"
+                	set id 1
+            	next
+        	end
+        	set priority-members 16 20
+    	next
+    	edit 93
+        	set name "fast-local"
+        	set load-balance enable
+        	set mode sla
+        	set dst "all"
+        	set src "sh-ship-local-networks"
+        	config sla
+            	edit "arf74internet"
+                	set id 1
+            	next
+        	end
+        	set priority-members 2 6
+    	next
+    	edit 94
+        	set name "vsat-to-hub1"
+        	set load-balance enable
+        	set mode sla
+        	set dst "all"
+        	set src "sh-ship-local-networks"
+        	config sla
+            	edit "arf74internet"
+                	set id 1
+            	next
+        	end
+        	set priority-members 10 11
+    	next
+    	edit 95
+        	set name "vsat-to-hub2"
+        	set load-balance enable
+        	set mode sla
+        	set dst "all"
+        	set src "sh-ship-local-networks"
+        	config sla
+            	edit "arf74internet"
+                	set id 1
+            	next
+        	end
+        	set priority-members 17 18
+    	next
+    	edit 96
+        	set name "vsat-local"
+        	set load-balance enable
+        	set mode sla
+        	set dst "all"
+        	set src "sh-ship-local-networks"
+        	config sla
+            	edit "arf74internet"
+                	set id 1
+            	next
+        	end
+        	set priority-members 4 3
+    	next
+	end #end config service
+end #end config system sdwan
