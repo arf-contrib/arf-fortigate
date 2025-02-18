@@ -1,9 +1,0 @@
-config ips sensor
-    edit "arf74-ips-sensor"
-        config entries
-            edit 1
-                set action pass
-            next
-        end
-    next
-end

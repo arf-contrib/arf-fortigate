@@ -1,8 +1,0 @@
-config firewall addrgrp
-    edit "priority-device-group"
-        set member "arf74-dummy-address"
-    next
-    edit "throttle-device-group"
-        set member "arf74-dummy-address"
-    next
-end

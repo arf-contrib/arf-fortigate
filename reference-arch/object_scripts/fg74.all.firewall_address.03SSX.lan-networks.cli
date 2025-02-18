@@ -1,8 +1,0 @@
-config firewall address
-    # repeat for all onboard *networks*
-    #edit "sh-example-entire-network"
-        #set type subnet
-        #set subnet 192.168.1.0 255.255.255.0
-        #set comment "example-entire-network"
-    #next
-end

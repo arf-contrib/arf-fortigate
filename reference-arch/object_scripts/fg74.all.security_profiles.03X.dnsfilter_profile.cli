@@ -1,9 +1,0 @@
-config dnsfilter profile
-	edit "arf74-dnsfilter-profile"
-		config ftgd-dns
-			set options error-allow
-		end
-		set log-all-domain enable
-		set block-botnet enable
-	next
-end
