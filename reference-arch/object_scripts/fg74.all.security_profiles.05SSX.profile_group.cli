@@ -1,0 +1,32 @@
+#LAN application list & profile group
+
+config firewall profile-group
+	edit "arf74-lan-profile-group"
+		set ssl-ssh-profile "arf74-ssl-ssh-profile"
+		set dnsfilter-profile "arf74-dnsfilter-profile"
+		set ips-sensor "arf74-ips-sensor"
+		set application-list "arf74-lan-application-list"
+	next
+end
+
+#Shore WAN application list & profile group
+config firewall profile-group
+	edit "arf74-shore-wan-profile-group"
+		set ssl-ssh-profile "arf74-ssl-ssh-profile"
+		set dnsfilter-profile "arf74-dnsfilter-profile"
+		set ips-sensor "arf74-ips-sensor"
+        set application-list "arf74-shore-wan-application-list"
+    next
+end
+
+#Underway WAN application list & profile group
+config firewall profile-group
+	edit "arf74-underway-wan-profile-group"
+		set ssl-ssh-profile "arf74-ssl-ssh-profile"
+		set dnsfilter-profile "arf74-dnsfilter-profile"
+		set ips-sensor "arf74-ips-sensor"
+        set application-list "arf74-underway-wan-application-list"
+    next
+end
+
+
